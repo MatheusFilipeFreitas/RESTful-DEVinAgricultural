@@ -1,0 +1,22 @@
+<Desenvolver API>
+	>Empresas (nome, CNPJ, endereço)
+	>Fazendas (nome, endereço, {Estrangeiro} grão)
+	>Graos (nome, {Estrangeiro} empresa, tempo médio "Em dias")
+	>Funcionários (nome, sobrenome, cpf, endereço, telefone, sexo, data de nascimento, data de contratação, {Estrangeiro} empresa)
+
+
+[]Validação;
+Implementar
+	{
+		[]-Model;
+		[]-Repository;
+		[]-Controller;
+		[]-Service;
+	}
+Operações
+	{
+		[]-Cadastro;
+		[]-Registro;
+	}
+[]Associações entre entidades;
+Retorno de dados;
