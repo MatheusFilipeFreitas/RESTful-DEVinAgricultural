@@ -25,8 +25,18 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Employee update(Employee employee){
-        return employeeRepository.save(employee);
+    public Employee update(Long id, Employee employee){
+
+        Employee searchEmployee = employeeRepository.getById(id);
+        searchEmployee.setName(employee.getName());
+        searchEmployee.setLastName(employee.getLastName());
+        searchEmployee.setCpf(employee.getCpf());
+        searchEmployee.setAddress(employee.getAddress());
+        searchEmployee.setPhoneNumber(employee.getPhoneNumber());
+        searchEmployee.setBirthDate(employee.getBirthDate());
+        searchEmployee.setHiringDate(employee.getHiringDate());
+        searchEmployee.setEnterprise(employee.getEnterprise());
+        return employeeRepository.save(searchEmployee);
     }
 
     public void delete(Employee employee){

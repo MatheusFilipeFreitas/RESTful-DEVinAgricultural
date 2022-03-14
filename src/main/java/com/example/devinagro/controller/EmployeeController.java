@@ -4,11 +4,10 @@ import com.example.devinagro.model.Employee;
 import com.example.devinagro.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,7 +17,7 @@ public class EmployeeController {
 
     private EmployeeService employeeService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Employee>> findAll(){
         List<Employee> list = employeeService.findAll();
         return ResponseEntity.ok().body(list);
@@ -28,6 +27,20 @@ public class EmployeeController {
     public ResponseEntity<Employee> findById(@PathVariable Long id){
         Employee obj = employeeService.findById(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @PostMapping( "/insert")
+    public ResponseEntity<Employee> insert(@RequestBody Employee employee){
+        employee = employeeService.add(employee);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("{id}").buildAndExpand(employee.getId()).toUri();
+        return ResponseEntity.created(uri).body(employee);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> update(@PathVariable Long id, @RequestBody Employee employee){
+        employee = employeeService.update(id, employee);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("{id}").buildAndExpand(employee.getId()).toUri();
+        return ResponseEntity.ok().body(employee);
     }
 
 }

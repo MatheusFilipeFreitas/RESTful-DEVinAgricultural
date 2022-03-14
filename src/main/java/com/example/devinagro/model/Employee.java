@@ -42,5 +42,5 @@ public class Employee {
 
     @OneToOne
     @JoinColumn(name = "enterprise_id")
-    private Enterprise enterprise;
+    Enterprise enterprise;
 }

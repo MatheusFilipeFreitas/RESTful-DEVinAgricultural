@@ -27,5 +27,5 @@ public class Grain {
 
     @OneToOne
     @JoinColumn(name = "enterprise_id")
-    private Enterprise enterprise;
+    Enterprise enterprise;
 }

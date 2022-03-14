@@ -27,5 +27,10 @@ public class Farm {
 
     @OneToOne
     @JoinColumn(name = "grain_id")
-    private Grain grain;
+    Grain grain;
+
+    @OneToOne
+    @JoinColumn(name = "enterprise_id")
+    Enterprise enterprise;
+
 }

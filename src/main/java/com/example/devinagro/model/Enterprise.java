@@ -15,6 +15,8 @@ import javax.persistence.*;
 @Table(name = "enterprise")
 public class Enterprise {
 
+    //From New Enterprise Register
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,9 +24,10 @@ public class Enterprise {
     @Column(nullable = false, length = 60)
     private String name;
 
-    @Column(nullable = false, length = 11)
+    @Column(nullable = false, length = 18)
     private String cnpj;
 
     @Column(nullable = false, length = 100)
     private String location;
+
 }
