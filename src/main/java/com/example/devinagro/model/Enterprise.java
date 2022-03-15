@@ -15,8 +15,6 @@ import javax.persistence.*;
 @Table(name = "enterprise")
 public class Enterprise {
 
-    //From New Enterprise Register
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

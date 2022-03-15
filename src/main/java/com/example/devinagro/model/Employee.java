@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -25,13 +26,16 @@ public class Employee {
     @Column(nullable = false, length = 30)
     private String lastName;
 
-    @Column(nullable = false,unique = true, length = 11)
+    @Column(nullable = false, unique = true, length = 14)
     private String cpf;
 
-    @Column(nullable = false,unique = true, length = 100)
+    @Column(nullable = false)
+    private String sex;
+
+    @Column(nullable = false, length = 100)
     private String address;
 
-    @Column(nullable = false, length = 11)
+    @Column(nullable = false, unique = true, length = 13)
     private String phoneNumber;
 
     @Column(nullable = false, length = 10)

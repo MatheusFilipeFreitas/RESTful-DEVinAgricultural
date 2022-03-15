@@ -1,5 +1,6 @@
 package com.example.devinagro.controller;
 
+import com.example.devinagro.dto.EmployeeDto;
 import com.example.devinagro.model.Employee;
 import com.example.devinagro.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -37,10 +38,15 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> update(@PathVariable Long id, @RequestBody Employee employee){
-        employee = employeeService.update(id, employee);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("{id}").buildAndExpand(employee.getId()).toUri();
-        return ResponseEntity.ok().body(employee);
+    public ResponseEntity<Employee> update(@PathVariable Long id, @RequestBody EmployeeDto employee){
+        Employee result = employeeService.update(id, employee.converter(employeeService.findById(id)));
+        return ResponseEntity.ok().body(result);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        employeeService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

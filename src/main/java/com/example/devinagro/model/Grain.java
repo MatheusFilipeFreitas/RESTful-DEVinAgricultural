@@ -23,7 +23,7 @@ public class Grain {
     private String name;
 
     @Column(nullable = false, length = 60)
-    private Long days;
+    private Long averageDays;
 
     @OneToOne
     @JoinColumn(name = "enterprise_id")

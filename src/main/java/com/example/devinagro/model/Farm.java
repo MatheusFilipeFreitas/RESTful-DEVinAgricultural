@@ -25,6 +25,9 @@ public class Farm {
     @Column(nullable = false, length = 100)
     private String location;
 
+    @Column
+    private double startInventory;
+
     @OneToOne
     @JoinColumn(name = "grain_id")
     Grain grain;

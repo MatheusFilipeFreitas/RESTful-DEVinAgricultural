@@ -1,5 +1,6 @@
 package com.example.devinagro.service;
 
+import com.example.devinagro.dto.EmployeeDto;
 import com.example.devinagro.model.Employee;
 import com.example.devinagro.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,8 @@ public class EmployeeService {
     }
 
     public Employee update(Long id, Employee employee){
+        /*
+        SEE Uptade using DTO class
 
         Employee searchEmployee = employeeRepository.getById(id);
         searchEmployee.setName(employee.getName());
@@ -36,10 +39,11 @@ public class EmployeeService {
         searchEmployee.setBirthDate(employee.getBirthDate());
         searchEmployee.setHiringDate(employee.getHiringDate());
         searchEmployee.setEnterprise(employee.getEnterprise());
-        return employeeRepository.save(searchEmployee);
+        */
+        return employeeRepository.save(employee);
     }
 
-    public void delete(Employee employee){
-        employeeRepository.delete(employee);
+    public void delete(Long id){
+        employeeRepository.deleteById(id);
     }
 }
