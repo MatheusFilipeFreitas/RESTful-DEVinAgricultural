@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -46,4 +47,5 @@ public class EnterpriseService {
     public void delete(Long id){
         enterpriseRepository.deleteById(id);
     }
+
 }

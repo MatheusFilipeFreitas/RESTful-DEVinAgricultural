@@ -20,6 +20,8 @@ public class EnterpriseController {
 
     private EnterpriseService enterpriseService;
 
+    //EndPoint 1)
+
     @GetMapping("/all")
     public ResponseEntity<List<Enterprise>> findAll(){
         List<Enterprise> list = enterpriseService.findAll();

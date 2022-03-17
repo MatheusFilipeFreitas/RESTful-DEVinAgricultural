@@ -28,6 +28,12 @@ public class Farm {
     @Column
     private double startInventory;
 
+    @Column(nullable = false, length = 10)
+    private String lastHarvest;
+
+    @Column(nullable = false, length = 10)
+    private String nextHarvest;
+
     @OneToOne
     @JoinColumn(name = "grain_id")
     Grain grain;

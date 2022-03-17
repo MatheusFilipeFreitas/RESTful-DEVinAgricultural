@@ -20,6 +20,7 @@ import java.util.List;
 public class FarmController {
 
     private FarmService farmService;
+    private EnterpriseService enterpriseService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Farm>> findAll(){
@@ -51,4 +52,16 @@ public class FarmController {
         farmService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping(value = "enterprise/{id}")
+    public ResponseEntity<List<Farm>> findByEnterprise(@PathVariable Long id){
+        List<Farm> list = farmService.findAllEnterprisesById(id);
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping(value = "count/{id}")
+    public int countByEnterprise(@PathVariable Long id){
+        return farmService.countEnterprisesById(id);
+    }
+
 }

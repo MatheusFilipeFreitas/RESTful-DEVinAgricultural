@@ -1,11 +1,13 @@
 package com.example.devinagro.service;
 
+import com.example.devinagro.model.Enterprise;
 import com.example.devinagro.model.Farm;
 import com.example.devinagro.repository.FarmRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @AllArgsConstructor
 @Service
@@ -26,7 +28,6 @@ public class FarmService {
     }
 
     public Farm update(Long id, Farm farm){
-
           /*
         SEE Uptade using DTO class
 
@@ -41,6 +42,14 @@ public class FarmService {
         searchEmployee.setEnterprise(employee.getEnterprise());
         */
         return farmRepository.save(farm);
+    }
+
+    public List<Farm> findAllEnterprisesById(Long id){
+        return farmRepository.findAllByEnterpriseId(id);
+    }
+
+    public int countEnterprisesById(Long id){
+        return farmRepository.countAllByEnterpriseId(id);
     }
 
     public void delete(Long id){
