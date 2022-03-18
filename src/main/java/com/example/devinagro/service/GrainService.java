@@ -45,4 +45,8 @@ public class GrainService {
         grainRepository.deleteById(id);
     }
 
+    public List<Grain> findAllByEnterpriseId(Long id){
+        return grainRepository.findAllByEnterpriseId(id);
+    }
+
 }

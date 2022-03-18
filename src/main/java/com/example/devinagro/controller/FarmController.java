@@ -2,6 +2,7 @@ package com.example.devinagro.controller;
 
 import com.example.devinagro.dto.EnterpriseDto;
 import com.example.devinagro.dto.FarmDto;
+import com.example.devinagro.dto.FarmEnterpriseDto;
 import com.example.devinagro.model.Enterprise;
 import com.example.devinagro.model.Farm;
 import com.example.devinagro.service.EnterpriseService;
@@ -20,7 +21,8 @@ import java.util.List;
 public class FarmController {
 
     private FarmService farmService;
-    private EnterpriseService enterpriseService;
+
+    //localhost:8080/farm/insert
 
     @GetMapping("/all")
     public ResponseEntity<List<Farm>> findAll(){
@@ -28,11 +30,42 @@ public class FarmController {
         return ResponseEntity.ok().body(list);
     }
 
+    //"{id}" change to the number you want.
+    //localhost:8080/farm/{id}
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<Farm> findById(@PathVariable Long id){
         Farm obj = farmService.findById(id);
         return ResponseEntity.ok().body(obj);
     }
+
+    //"{id}" change to the number you want.
+    //localhost:8080/farm/enterprise/{id}
+
+    @GetMapping(value = "enterprise/{id}")
+    public ResponseEntity<List<Farm>> findByEnterprise(@PathVariable Long id){
+        List<Farm> list = farmService.findAllEnterprisesById(id);
+        return ResponseEntity.ok().body(list);
+    }
+
+    //"{id}" change to the number you want.
+    //localhost:8080/farm/count/{id}
+
+    @GetMapping(value = "count/{id}")
+    public int countByEnterprise(@PathVariable Long id){
+        return farmService.countEnterprisesById(id);
+    }
+
+    //"{id}" change to the number you want.
+    //localhost:8080/farm/attributes/{id}
+
+    @GetMapping(value = "attributes/{id}")
+    public ResponseEntity<List<Farm>> findByEnterpriseAttributes(@PathVariable Long id){
+        List<Farm> list = farmService.findAllEnterprisesByIdAttributes(id);
+        return ResponseEntity.ok().body(list);
+    }
+
+    //localhost:8080/farm/insert
 
     @PostMapping( "/insert")
     public ResponseEntity<Farm> insert(@RequestBody Farm farm){
@@ -41,11 +74,17 @@ public class FarmController {
         return ResponseEntity.created(uri).body(farm);
     }
 
+    //"{id}" change to the number you want.
+    //localhost:8080/farm/{id}
+
     @PutMapping("/{id}")
     public ResponseEntity<Farm> update(@PathVariable Long id, @RequestBody FarmDto farm){
         Farm result = farmService.update(id, farm.converter(farmService.findById(id)));
         return ResponseEntity.ok().body(result);
     }
+
+    //"{id}" change to the number you want.
+    //localhost:8080/farm/{id}
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
@@ -53,15 +92,6 @@ public class FarmController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "enterprise/{id}")
-    public ResponseEntity<List<Farm>> findByEnterprise(@PathVariable Long id){
-        List<Farm> list = farmService.findAllEnterprisesById(id);
-        return ResponseEntity.ok().body(list);
-    }
 
-    @GetMapping(value = "count/{id}")
-    public int countByEnterprise(@PathVariable Long id){
-        return farmService.countEnterprisesById(id);
-    }
 
 }

@@ -9,25 +9,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Id;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FarmDto {
+public class FarmEnterpriseDto {
 
-    @JsonIgnore
     private Long id;
 
     private String name;
 
+    @JsonIgnore
     private String location;
 
+    @JsonIgnore
     private double startInventory;
 
+    @JsonIgnore
     private String lastHarvest;
 
     private String nextHarvest;
 
+    @JsonIgnore
     private Grain grain;
 
     @JsonIgnore
@@ -35,6 +40,7 @@ public class FarmDto {
 
 
     public Farm converter(Farm farm){
+        farm.setId(id);
         farm.setName(name);
         farm.setLocation(location);
         farm.setStartInventory(startInventory);

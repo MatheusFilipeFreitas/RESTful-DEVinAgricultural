@@ -1,5 +1,6 @@
 package com.example.devinagro.service;
 
+import com.example.devinagro.dto.FarmDto;
 import com.example.devinagro.model.Enterprise;
 import com.example.devinagro.model.Farm;
 import com.example.devinagro.repository.FarmRepository;
@@ -28,20 +29,11 @@ public class FarmService {
     }
 
     public Farm update(Long id, Farm farm){
-          /*
-        SEE Uptade using DTO class
-
-        Employee searchEmployee = employeeRepository.getById(id);
-        searchEmployee.setName(employee.getName());
-        searchEmployee.setLastName(employee.getLastName());
-        searchEmployee.setCpf(employee.getCpf());
-        searchEmployee.setAddress(employee.getAddress());
-        searchEmployee.setPhoneNumber(employee.getPhoneNumber());
-        searchEmployee.setBirthDate(employee.getBirthDate());
-        searchEmployee.setHiringDate(employee.getHiringDate());
-        searchEmployee.setEnterprise(employee.getEnterprise());
-        */
         return farmRepository.save(farm);
+    }
+
+    public void delete(Long id){
+        farmRepository.deleteById(id);
     }
 
     public List<Farm> findAllEnterprisesById(Long id){
@@ -52,7 +44,9 @@ public class FarmService {
         return farmRepository.countAllByEnterpriseId(id);
     }
 
-    public void delete(Long id){
-        farmRepository.deleteById(id);
+    public List<Farm> findAllEnterprisesByIdAttributes(Long id){
+        return farmRepository.findAllByEnterpriseId(id);
     }
+
+
 }

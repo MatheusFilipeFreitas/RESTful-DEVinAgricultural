@@ -46,4 +46,10 @@ public class EmployeeService {
     public void delete(Long id){
         employeeRepository.deleteById(id);
     }
+
+    public int countAllByEnterpriseId(Long id){
+        return employeeRepository.countAllByEnterpriseId(id);
+    }
+
+    public List<Employee> findAllByEnterpriseId(Long id){ return employeeRepository.findAllByEnterpriseId(id); }
 }
