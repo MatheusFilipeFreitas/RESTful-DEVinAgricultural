@@ -18,6 +18,7 @@ public class EmployeeController {
 
     private EmployeeService employeeService;
 
+    //GET ALL
     //localhost:8080/employee/all
 
     @GetMapping("/all")
@@ -26,6 +27,7 @@ public class EmployeeController {
         return ResponseEntity.ok().body(list);
     }
 
+    //GET BY ID
     //localhost:8080/employee/insert
 
     @GetMapping(value = "/{id}")
@@ -34,6 +36,7 @@ public class EmployeeController {
         return ResponseEntity.ok().body(obj);
     }
 
+    //GET BY ENTERPRISE ID
     //"{id}" change to the number you want.
     //localhost:8080/employee/enterprise/{id}
 
@@ -43,6 +46,7 @@ public class EmployeeController {
         return ResponseEntity.ok().body(list);
     }
 
+    //COUNT BY ENTERPRISE ID
     //"{id}" change to the number you want.
     //localhost:8080/employee/count/{id}
 
@@ -51,35 +55,50 @@ public class EmployeeController {
         return employeeService.countAllByEnterpriseId(id);
     }
 
+    //INSERT
     //localhost:8080/employee/insert
 
     @PostMapping( "/insert")
-    public ResponseEntity<Employee> insert(@RequestBody Employee employee){
-        if((employee.getPhoneNumber().indexOf('(',0) >= 0 && employee.getPhoneNumber().indexOf(')',2)  >= 0  )
-             && (employee.getCpf().indexOf('.',3)  >= 0  && employee.getCpf().indexOf('.',7)  >= 0  && employee.getCpf().indexOf('-',11)  >= 0 )){
-            employee = employeeService.add(employee);
+    public ResponseEntity<EmployeeDto> insert(@RequestBody EmployeeDto employeeDto){
+
+        //Validate cpf format and phone number format
+        // CPF: xxx.xxx.xxx-xx
+        // PHONE NUMBER: (xx)xxxxxxxxx
+        if((employeeDto.getPhoneNumber().indexOf('(',0) >= 0 && employeeDto.getPhoneNumber().indexOf(')',2)  >= 0  )
+             && (employeeDto.getCpf().indexOf('.',3)  >= 0  && employeeDto.getCpf().indexOf('.',7)  >= 0  && employeeDto.getCpf().indexOf('-',11)  >= 0 )){
+
+            //Return Employee obj
+            Employee employee = employeeService.add(employeeDto.build());
             URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("{id}").buildAndExpand(employee.getId()).toUri();
-            return ResponseEntity.created(uri).body(employee);
+            return ResponseEntity.created(uri).body(employeeDto);
         }else{
             return null;
         }
 
     }
 
+    //UPDATE
     //"{id}" change to the number you want.
     //localhost:8080/employee/{id}
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> update(@PathVariable Long id, @RequestBody EmployeeDto employee){
-        if((employee.getPhoneNumber().indexOf('(',0) >= 0 && employee.getPhoneNumber().indexOf(')',2)  >= 0  )
-                && (employee.getCpf().indexOf('.',3)  >= 0  && employee.getCpf().indexOf('.',7)  >= 0  && employee.getCpf().indexOf('-',11)  >= 0 )){
-            Employee result = employeeService.update(id, employee.converter(employeeService.findById(id)));
-            return ResponseEntity.ok().body(result);
+    public ResponseEntity<EmployeeDto> update(@PathVariable Long id, @RequestBody EmployeeDto employeeDto){
+
+        //Validate cpf format and phone number format
+        // CPF: xxx.xxx.xxx-xx
+        // PHONE NUMBER: (xx)xxxxxxxxx
+        if((employeeDto.getPhoneNumber().indexOf('(',0) >= 0 && employeeDto.getPhoneNumber().indexOf(')',2)  >= 0  )
+                && (employeeDto.getCpf().indexOf('.',3)  >= 0  && employeeDto.getCpf().indexOf('.',7)  >= 0  && employeeDto.getCpf().indexOf('-',11)  >= 0 )){
+
+            //Return Employee obj
+            employeeService.update(id, employeeDto.converter(employeeService.findById(id)));
+            return ResponseEntity.ok().body(employeeDto);
         }else{
             return null;
         }
     }
 
+    //DELETE
     //"{id}" change to the number you want.
     //localhost:8080/employee/{id}
 

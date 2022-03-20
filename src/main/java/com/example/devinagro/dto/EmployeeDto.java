@@ -33,4 +33,17 @@ public class EmployeeDto {
         employee.setEnterprise(enterprise);
         return employee;
     }
+
+    public Employee build(){
+        Employee employee = new Employee();
+        employee.setName(this.name);
+        employee.setLastName(this.lastName);
+        employee.setCpf(this.cpf);
+        employee.setAddress(this.address);
+        employee.setPhoneNumber(this.phoneNumber);
+        employee.setBirthDate(this.birthDate);
+        employee.setHiringDate(this.hiringDate);
+        employee.setEnterprise(this.enterprise);
+        return employee;
+    }
 }

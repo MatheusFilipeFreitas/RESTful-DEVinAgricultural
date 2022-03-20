@@ -41,7 +41,12 @@ public class EnterpriseController {
 
     @PostMapping( "/insert")
     public ResponseEntity<Enterprise> insert(@RequestBody Enterprise enterprise){
+
+        //Validate the cnpj format
+        //CNPJ: xx.xxx.xxx/xxxx-xx
         if(enterprise.getCnpj().indexOf('.',2) >= 0 && enterprise.getCnpj().indexOf('.',6) >= 0 && enterprise.getCnpj().indexOf('/',10) >= 0 && enterprise.getCnpj().indexOf('-',15) >= 0 ){
+
+            //Return Enterprise obj
             enterprise = enterpriseService.add(enterprise);
             URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("{id}").buildAndExpand(enterprise.getId()).toUri();
             return ResponseEntity.created(uri).body(enterprise);
@@ -55,7 +60,12 @@ public class EnterpriseController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Enterprise> update(@PathVariable Long id, @RequestBody EnterpriseDto enterprise){
+
+        //Validate the cnpj format
+        //CNPJ: xx.xxx.xxx/xxxx-xx
         if(enterprise.getCnpj().indexOf('.',2) >= 0 && enterprise.getCnpj().indexOf('.',6) >= 0 && enterprise.getCnpj().indexOf('/',10) >= 0 && enterprise.getCnpj().indexOf('-',15) >= 0 ){
+
+            //Return Enterprise obj
             Enterprise result = enterpriseService.update(id, enterprise.converter(enterpriseService.findById(id)));
             return ResponseEntity.ok().body(result);
         }else{
