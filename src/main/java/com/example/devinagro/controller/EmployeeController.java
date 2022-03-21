@@ -19,7 +19,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     //GET ALL
-    //localhost:8080/employee/all
+    //localhost:8080/employee/allstarting
 
     @GetMapping("/all")
     public ResponseEntity<List<Employee>> findAll(){
@@ -28,7 +28,8 @@ public class EmployeeController {
     }
 
     //GET BY ID
-    //localhost:8080/employee/insert
+    //"{id}" change to the number you want.
+    //localhost:8080/employee/{id}
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Employee> findById(@PathVariable Long id){
