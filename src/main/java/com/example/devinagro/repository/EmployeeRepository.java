@@ -1,15 +1,13 @@
 package com.example.devinagro.repository;
 
-import com.example.devinagro.model.Employee;
+import com.example.devinagro.models.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-    public List<Employee> findAllByEnterpriseId(Long id);
-
-    public int countAllByEnterpriseId(Long id);
+    /*TODO: 1- Find Employee by Enterprise Id
+            2- Count Employee by Enterprise Id
+     */
 }
